@@ -122,11 +122,12 @@ function checkForChange(light) {
 
 function monitor() {
   lightsToMonitor.forEach(light => {
-    checkForChange(light);
+    checkForChange(light)
+    .catch(err => {
+      console.log(`Error checking lights for change. Light: ${light.id} Error: ${err}`);
+    });
   });
 }
-
-
 
 init()  // Init discovers all the lights we will monitor.
   .then(() => {
